@@ -1,4 +1,3 @@
-// src/index.ts
-import { dumpWalletData } from './controller/account.controller';
+import { createWebSocketServer } from "./ws/heluis";
 
-dumpWalletData()
+createWebSocketServer(8080);
