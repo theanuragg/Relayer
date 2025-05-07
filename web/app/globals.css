@@ -101,3 +101,10 @@ body {
   color: transparent;   
   
 }
+
+/* Override default WalletMultiButton style */
+.wallet {
+  @apply bg-indigo-600 text-white rounded-lg px-4 py-2 font-semibold;
+
+
+}
