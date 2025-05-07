@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.next": true
+    },
+    "eslint.enable": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+  
