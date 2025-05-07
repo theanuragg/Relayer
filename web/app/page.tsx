@@ -3,6 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
+import HeroSection from '@/components/landing/hero';
+import GettingStarted from '@/components/landing/howitstart';
+import RewardCard from '@/components/landing/rewardcard';
 
 export default function HomePage() {
   const { publicKey } = useWallet();
@@ -16,11 +19,13 @@ export default function HomePage() {
   }, [publicKey]);
 
   return (
-    <main className="p-8">
-      <WalletMultiButton />
-      {userPubkey && (
-        <p className="mt-4">🔑 Your public key: {userPubkey}</p>
-      )}
+    <main  className=' bg-[#000206] py-20'>
+      {/* <WalletMultiButton /> */}
+      <HeroSection/>
+      <GettingStarted/>
+      <div className="pt-40">
+      <RewardCard/>
+      </div>
     </main>
   );
 }

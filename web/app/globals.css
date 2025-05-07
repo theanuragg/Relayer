@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #000206;
   --foreground: #171717;
 }
 
@@ -10,6 +10,31 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite
+    alternate;
+  --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+
+  @keyframes shimmer-slide {
+    to {
+      transform: translate(calc(100cqw - 100%), 0);
+    }
+  }
+  @keyframes spin-around {
+    0% {
+      transform: translateZ(0) rotate(0);
+    }
+    15%,
+    35% {
+      transform: translateZ(0) rotate(90deg);
+    }
+    65%,
+    85% {
+      transform: translateZ(0) rotate(270deg);
+    }
+    100% {
+      transform: translateZ(0) rotate(360deg);
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +48,56 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+.custom-span {
+  font-family: "Inter", "Inter Fallback", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  color: rgb(109, 106, 106); 
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.custom-heading {
+  font-family: system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 500;
+  background: linear-gradient(to top, #6b7280, #ffffff); /* Gray bottom to white top */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; 
+  color: transparent;   
+  
+}
+.custom-heading2 {
+  font-family: "Instrument Serif", "Instrument Serif Fallback", serif;
+  font-style: italic;
+  font-weight: 200;
+  color: #559efd; 
+  font-size: 30px;
+  line-height: 30px;
+  
+}
+
+
+.custom-heading3 {
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: rgb(231, 226, 226);
+  font-size: 44px;
+  line-height: 52px;
+}
+.custom-heading4 {
+  font-family: system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 300;
+  background: linear-gradient(to top, #6b7280, #ffffff); /* Gray bottom to white top */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; 
+  color: transparent;   
+  
 }
