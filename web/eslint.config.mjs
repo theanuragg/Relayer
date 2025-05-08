@@ -14,3 +14,12 @@ const eslintConfig = [
 ];
 
 export default eslintConfig;
+
+
+module.exports = {
+  plugins: ['import'],
+  rules: {
+    'import/no-unresolved': 'error',
+    'import/no-named-as-default': 'warn',
+  },
+};
