@@ -9,7 +9,7 @@ declare global {
 }
 
 // Constants
-const MAIN_WALLET = "5jeASqLezFbqGsgLeNYKgb7ySzzpCXk7zXMTsxewXADS";
+const MAIN_WALLET = "6UoCsHVFQ4oBv9yRxnjpbBTedJiWdneX4MEuvZwMKh66";
 const WS_URL = "ws://localhost:8080";
 
 // Helper functions
