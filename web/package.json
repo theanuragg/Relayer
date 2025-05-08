@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev ",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -22,8 +22,6 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "tailwind-merge": "^3.2.0",
-    "vis-data": "^7.1.9",
-    "vis-network": "^9.1.9",
     "zustand": "^5.0.4"
   },
   "devDependencies": {
@@ -35,6 +33,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "eslint-plugin-import": "^2.31.0",
+    "lucide-react": "^0.508.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
