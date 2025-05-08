@@ -1,3 +1,5 @@
+'use client';
+
 import * as d3 from "d3";
 
 // ZoomControls is a functional component that adds zoom control elements to an SVG

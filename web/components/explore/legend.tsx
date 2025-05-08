@@ -1,3 +1,5 @@
+'use client';
+
 export default function Legend() {
     return (
       <div className="border rounded-lg shadow-lg bg-white p-4 mb-4">

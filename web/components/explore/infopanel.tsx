@@ -1,32 +1,7 @@
-import useTransactionStore from "../../store/transactionstore";
+'use client';
 
-export default function InfoPanel() {
-  const { selectedElement, selectedType} = useTransactionStore();
-  
-  const clearSelection = () => {
-    // Add logic to clear the selection
-    console.log("Selection cleared");
-  };
-
-  return (
-    <div className="absolute top-2 right-2 bg-white border shadow-md p-4 rounded max-w-xs">
-      {selectedType === 'node' && <NodeInfo node={selectedElement as Node} />}
-      {selectedType === 'link' && <TransactionInfo transaction={selectedElement as Transaction} />}
-      
-      <button 
-        onClick={clearSelection}
-        className="mt-2 px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-      >
-        Close
-      </button>
-    </div>
-  );
-}
-
-interface Node {
-  fullAddress: string;
-  isMainWallet: boolean;
-}
+import  useTransactionStore  from '../../store/transactionstore'; // Update path as needed
+import { Node, Transaction } from '../../types/transactiontypes';
 
 function NodeInfo({ node }: { node: Node }) {
   return (
@@ -38,13 +13,6 @@ function NodeInfo({ node }: { node: Node }) {
       )}
     </>
   );
-}
-
-interface Transaction {
-  amount: number;
-  source: { id?: string } | string;
-  target: { id?: string } | string;
-  signature: string;
 }
 
 function TransactionInfo({ transaction }: { transaction: Transaction }) {
@@ -63,7 +31,7 @@ function TransactionInfo({ transaction }: { transaction: Transaction }) {
       <p className="mb-2">
         <span className="font-semibold">To:</span>{" "}
         <span className="break-all">
-        {typeof transaction.source === 'object' && transaction.source.id ? transaction.source.id : String(transaction.source)}
+          {typeof transaction.target === 'object' && transaction.target.id ? transaction.target.id : String(transaction.target)}
         </span>
       </p>
       <p className="mb-2">
@@ -75,3 +43,31 @@ function TransactionInfo({ transaction }: { transaction: Transaction }) {
     </>
   );
 }
+
+export default function InfoPanel() {
+  // Get state and actions from the refactored store
+  const { selectedElement, selectedType, clearSelection } = useTransactionStore();
+
+  // Using the clearSelection function directly from the store now
+  const handleClearSelection = () => {
+    clearSelection();
+    console.log("Selection cleared");
+  };
+
+  return (
+    <div className="absolute top-2 right-2 bg-white border shadow-md p-4 rounded max-w-xs">
+      {selectedType === 'node' && <NodeInfo node={selectedElement as Node} />}
+      {selectedType === 'link' && <TransactionInfo transaction={selectedElement as Transaction} />}
+      
+      <button 
+        onClick={handleClearSelection}
+        className="mt-2 px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+      >
+        Close
+      </button>
+    </div>
+  );
+}
+
+// RawDataViewer.tsx
+
