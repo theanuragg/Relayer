@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { FaCoins, FaLock, FaChartLine } from 'react-icons/fa';
+import { FaCoins, FaLock } from 'react-icons/fa';
 import { MagicCard } from '../ui/magiccard';
 // import { cn } from "@/lib/utils"; // Optional if you use clsx or cn utility
 
