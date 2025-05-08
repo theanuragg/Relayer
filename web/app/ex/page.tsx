@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import GraphVisualization from "../../components/explore/graphvisualization";
-import InfoPanel from "../../components/explore/infopanel";
+import   TransactionInfo  from "../../components/explore/infopanel";
 import Legend from "../../components/explore/legend";
 import RawDataViewer from "../../components/explore/rawdataviewer";
 import useTransactionStore from "../../store/transactionstore";
+import InfoPanel from "../../components/explore/infopanel";
 
 export default function TransactionGraph() {
   // Get state and actions from the store
@@ -76,26 +77,29 @@ export default function TransactionGraph() {
         </div>
       ) : (
         <div className="flex flex-col md:flex-row gap-4">
-          <div className="border rounded-lg shadow-lg bg-white p-4 h-96 md:h-[600px] w-full relative">
-            {/* Debug display for graph data */}
+          {/* <div className="border rounded-lg shadow-lg bg-white p-4 h-96 md:h-[600px] w-full relative"> */}
+            {/* Debug display for graph data
             {graphData && graphData.nodes && graphData.nodes.length === 0 && (
               <div className="bg-yellow-100 p-2 mb-2 rounded">
                 No nodes to display. Check WebSocket connection.
               </div>
-            )}
+            )} */}
             
             {/* Graph visualization */}
-            <GraphVisualization />
+            {/* <GraphVisualization /> */}
             
             {/* Info panel for selected elements */}
+            <div>
             {selectedElement && (
-              <InfoPanel />
+              <InfoPanel/>
+
+
             )}
           </div>
-          
+                 
           <div className="w-full md:w-1/3">
-            <Legend />
-            
+            {/* <Legend /> */}
+            <TransactionInfo/>
             {/* Raw data display */}
             <div className="border rounded-lg shadow-lg bg-white p-4 mt-4 max-h-80 overflow-auto">
               <h3 className="font-semibold mb-2">Raw WebSocket Data</h3>
