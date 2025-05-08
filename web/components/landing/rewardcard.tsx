@@ -24,9 +24,11 @@ export default function RewardCard() {
         <p className="text-gray-300 custom-span">
           Don’t just hold your crypto, make it work for you.
         </p>
+        <div className='flex justify-center md:justify-start'>
        <ShimmerButton>
         get started
        </ShimmerButton>
+        </div>
       </div>
     </div>
   );
