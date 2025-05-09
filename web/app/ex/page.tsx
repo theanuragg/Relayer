@@ -6,6 +6,7 @@ import GraphVisualization from "../../components/explore/graphvisualization";
 // import Legend from "../../components/explore/legend";
 import RawDataViewer from "../../components/explore/rawdataviewer";
 import useTransactionStore from "../../store/transactionstore";
+// import AppBar from "@/components/explore/appbar";
 
 export default function TransactionGraph() {
   // Get state and actions from the store
@@ -45,11 +46,11 @@ export default function TransactionGraph() {
 
   return (
     <div className="flex flex-col w-full">
-      <h2 className="text-xl font-bold mb-4 custom-heading3">Solana Transaction Network</h2>
-      <div className="flex p-4 flex-row gap-4 mb-4">
+      {/* <AppBar /> */}
+      <div className="flex p-4 flex-row gap-4 my-16">
         <RawDataViewer />
         
-        <div className="flex flex-col gap-4 w-2xl h-full">
+        <div className="flex flex-col gap-4 w-2xl mt-6 h-full">
           <GraphVisualization />
           <div className="flex flex-col w-full">
             {/* <InfoPanel /> */}
