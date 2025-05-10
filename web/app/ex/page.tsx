@@ -6,7 +6,7 @@ import GraphVisualization from "../../components/explore/graphvisualization";
 // import Legend from "../../components/explore/legend";
 import RawDataViewer from "../../components/explore/rawdataviewer";
 import useTransactionStore from "../../store/transactionstore";
-// import AppBar from "@/components/explore/appbar";
+import AppBar from "@/components/explore/appbar";
 
 export default function TransactionGraph() {
   // Get state and actions from the store
@@ -46,7 +46,7 @@ export default function TransactionGraph() {
 
   return (
     <div className="flex flex-col w-full">
-      {/* <AppBar /> */}
+      <AppBar />
       <div className="flex p-4 flex-row gap-4 my-16">
         <RawDataViewer />
         
