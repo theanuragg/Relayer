@@ -1,61 +1,70 @@
-
-
 export interface WebSocketTransaction {
-    signature: string;
-    timestamp: number;
-    fee: number;
-    type: string;
-    status?: string;
-    from: string | null;
-    to: string | null;
-    amount: number | null;
-    tokenAddress: string | null;
-    description?: string;
-  }
-  
-  export interface Node {
-    id: string;
-    label: string;
-    fullAddress: string;
-    isMainWallet: boolean;
-  }
-  
-  export interface Link {
-    id: string;
-    source: string;
-    target: string;
-    amount: number;
-    signature: string;
-    description?: string;
-  }
-  
-  export interface GraphData {
-    nodes: Node[];
-    links: GraphLink[];
-  }
-  
-  export interface TransactionState {
-    transactions: WebSocketTransaction[];
-    rawMessage: unknown;
-    error: string | null;
-    graphData: GraphData;
-    selectedElement: unknown;
-    selectedType: string | null;
-    connected: boolean;
-    isLoading: boolean;
-  }
-  
-  export interface TransactionActions {
-    initializeData: () => void;
-    connectWebSocket: () => void;
-    disconnectWebSocket: () => void;
-    processTransactions: (transactions: WebSocketTransaction[]) => void;
-    setSelectedElement: (element: unknown, type: string) => void;
-    clearSelection: () => void;
-    setError: (error: string | Error) => void;
-    clearError: () => void;
-  }
+  signature: string;
+  timestamp: number;
+  fee: number;
+  type: string;
+  status?: string;
+  from: string | null;
+  to: string | null;
+  amount: number | null;
+  tokenAddress: string | null;
+  description?: string;
+}
 
+export interface Node {
+  id: string;
+  label: string;
+  fullAddress: string;
+  isMainWallet: boolean;
+}
+
+export interface Link {
+  id: string;
+  source: string;
+  target: string;
+  amount: number;
+  signature: string;
+  description?: string;
+}
+
+export interface GraphData {
+  nodes: Node[];
+  links: GraphLink[];
+}
+
+export interface TransactionState {
+  // State
+  transactions: WebSocketTransaction[];
+  rawMessage: any;
+  error: string | null;
+  graphData: GraphData;
+  selectedElement: any | null;
+  selectedType: string | null;
+  connected: boolean;
+  isLoading: boolean;
+
+  // Actions
+  initializeData: () => void;
+  connectWebSocket: () => void;
+  disconnectWebSocket: () => void;
+  sendWalletQuery: (walletAddress: string) => void;
+  processTransactions: (transactions: WebSocketTransaction[]) => void;
+  setSelectedElement: (element: any, type: string) => void;
+  clearSelection: () => void;
+  setError: (error: any) => void;
+  clearError: () => void;
+}
+
+export interface TransactionActions {
+  initializeData: () => void;
+  connectWebSocket: () => void;
+  disconnectWebSocket: () => void;
+  processTransactions: (transactions: WebSocketTransaction[]) => void;
+  setSelectedElement: (element: unknown, type: string) => void;
+  clearSelection: () => void;
+  setError: (error: string | Error) => void;
+  clearError: () => void;
+}
 
 // Base Node type from the store
 export interface Node {
@@ -92,7 +101,5 @@ export interface Transaction {
   target: { id?: string } | string;
   signature: string;
 }
-  
-  export type TransactionStore = TransactionState & TransactionActions;
 
-  
+export type TransactionStore = TransactionState & TransactionActions;
