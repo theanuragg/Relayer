@@ -1,8 +1,9 @@
+import { Wallet } from 'lucide-react';
 import { Node } from '../types/transactiontypes';
 
 // Constants
 export const MAIN_WALLET = "5jeASqLezFbqGsgLeNYKgb7ySzzpCXk7zXMTsxewXADS";
-export const WS_URL = "ws://localhost:8080";
+export const WS_URL = process.env.WEBSOCKET_SERVER ||"ws://localhost:8080";
 
 // Helper functions
 export const formatAddress = (address: string): string => {
@@ -22,6 +23,7 @@ export const createNode = (address: string): Node => {
 // Sample data for initial rendering
 export const sampleTransactions = [
   {
+    wallet:"",
     signature: "23nwtMzka6TeL4zCsXww6nJSpB9sw5eQiecJ9E6VWVgtt9vCnQVtcphAaURMgSHfNBrvaYMcr9Y9BC49ytjss7rg",
     timestamp: 1746339692,
     fee: 80000,
@@ -33,6 +35,7 @@ export const sampleTransactions = [
     tokenAddress: null
   },
   {
+    wallet:"",
     signature: "3EJsc2WoRVyy3kS86QfC8soQqcVZrSySFjFZFp262QiR375ZEQiRismxi2fpvqMxYB1tHuPLFr7fkhDYnGt9uPdE",
     timestamp: 1744994043,
     fee: 80000,
