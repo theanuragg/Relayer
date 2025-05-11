@@ -3,7 +3,8 @@ import { Node } from '../types/transactiontypes';
 
 // Constants
 export const MAIN_WALLET = "5jeASqLezFbqGsgLeNYKgb7ySzzpCXk7zXMTsxewXADS";
-export const WS_URL = process.env.WEBSOCKET_SERVER ||"ws://localhost:8080";
+export const WS_URL = process.env.NEXT_PUBLIC_WEBSOCKET_SERVER
+console.log("hey", process.env.NEXT_PUBLIC_WEBSOCKET_SERVER)
 
 // Helper functions
 export const formatAddress = (address: string): string => {

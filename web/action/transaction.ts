@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-const NEXT_PUBLIC_URL = process.env.WEBSOCKET_SERVER || "ws://localhost:8080";
+const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_WEBSOCKET_SERVER|| "ws://localhost:8080";
 
 export class WebSocketService {
   private socket: WebSocket | null = null;
