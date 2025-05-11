@@ -1,91 +1,95 @@
-
 import { WebSocketTransaction, GraphData, Node, Link } from '../types/transactiontypes';
-import { createNode, formatAddress, MAIN_WALLET } from '../lib/transactionutils';
+
+// Format addresses for labels
+const formatAddress = (address: string): string => {
+  if (!address) return "Unknown";
+  return `${address.substring(0, 4)}...${address.substring(address.length - 4)}`;
+};
+
+// Create graph node
+const createNode = (address: string, mainWallet: string): Node => {
+  return {
+    id: address,
+    label: formatAddress(address),
+    fullAddress: address,
+    isMainWallet: address === mainWallet,
+  };
+};
 
 export class TransactionProcessor {
+  private mainWallet: string;
+  
+  constructor(mainWallet: string) {
+    this.mainWallet = mainWallet;
+  }
+  
+  // Add a method to update the main wallet address
+  setMainWallet(walletAddress: string) {
+    this.mainWallet = walletAddress;
+  }
+
   processTransactions(transactions: WebSocketTransaction[]): GraphData {
-    console.log("Processing transactions:", transactions);
-    
-    // Track unique nodes (wallets)
     const uniqueNodes = new Map<string, Node>();
     const links: Link[] = [];
     
-    // Process each transaction
-    transactions.forEach(tx => {
-      // Handle WebSocket format transactions
-      if (tx.from && tx.to && tx.amount !== null) {
-        const fromAddress = tx.from;
-        const toAddress = tx.to;
-        const amount = tx.amount;
-        
-        // Add source node if it doesn't exist
-        if (!uniqueNodes.has(fromAddress)) {
-          uniqueNodes.set(fromAddress, createNode(fromAddress));
+    // Log for debugging
+    console.log("Processing transactions:", transactions.length);
+    
+    transactions.forEach((tx) => {
+      const { from, to, amount, signature } = tx;
+      
+      // Basic validation
+      if (from && to && amount !== null && signature) {
+        // Create nodes if they don't exist
+        if (!uniqueNodes.has(from)) {
+          uniqueNodes.set(from, createNode(from, this.mainWallet));
+        }
+        if (!uniqueNodes.has(to)) {
+          uniqueNodes.set(to, createNode(to, this.mainWallet));
         }
         
-        // Add target node if it doesn't exist
-        if (!uniqueNodes.has(toAddress)) {
-          uniqueNodes.set(toAddress, createNode(toAddress));
+        // Push link
+        links.push({
+          id: signature.substring(0, 8),
+          source: from,
+          target: to,
+          amount,
+          signature,
+          description: tx.description || `${formatAddress(from)} transferred ${amount} SOL to ${formatAddress(to)}`
+        });
+      }
+      
+      // Fallback type
+      else if (tx.signature && tx.type === "TRANSFER") {
+        const fallbackTo = tx.signature.substring(0, 32);
+        const fallbackAmount = 0.1;
+        
+        if (!uniqueNodes.has(this.mainWallet)) {
+          uniqueNodes.set(this.mainWallet, createNode(this.mainWallet, this.mainWallet));
+        }
+        if (!uniqueNodes.has(fallbackTo)) {
+          uniqueNodes.set(fallbackTo, createNode(fallbackTo, this.mainWallet));
         }
         
-        // Create link
         links.push({
           id: tx.signature.substring(0, 8),
-          source: fromAddress,
-          target: toAddress,
-          amount: amount,
+          source: this.mainWallet,
+          target: fallbackTo,
+          amount: fallbackAmount,
           signature: tx.signature,
-          description: tx.description || `${formatAddress(fromAddress)} transferred ${amount} SOL to ${formatAddress(toAddress)}`
+          description: `Transaction: ${tx.signature.substring(0, 8)}...`
         });
-      } else {
-        console.warn("Transaction missing required fields:", tx);
-        
-        // If we're getting the signature but missing the other data, 
-        // try to use a default pattern with the MAIN_WALLET
-        if (tx.signature && tx.type === "TRANSFER") {
-          // Create an artificial transaction with the main wallet
-          const fromAddress = MAIN_WALLET;
-          // Generate a random recipient address using part of the signature
-          const toAddress = tx.signature.substring(0, 32);
-          const amount = 0.1; // Default amount
-          
-          // Add source node if it doesn't exist
-          if (!uniqueNodes.has(fromAddress)) {
-            uniqueNodes.set(fromAddress, createNode(fromAddress));
-          }
-          
-          // Add target node if it doesn't exist
-          if (!uniqueNodes.has(toAddress)) {
-            uniqueNodes.set(toAddress, {
-              id: toAddress,
-              label: formatAddress(toAddress),
-              fullAddress: toAddress,
-              isMainWallet: false
-            });
-          }
-          
-          // Create link
-          links.push({
-            id: tx.signature.substring(0, 8),
-            source: fromAddress,
-            target: toAddress,
-            amount: amount,
-            signature: tx.signature,
-            description: `Transaction: ${tx.signature.substring(0, 8)}...`
-          });
-        }
       }
     });
     
-    // Convert Map to array
-    const nodes = Array.from(uniqueNodes.values());
-    
-    console.log("Processed graph data:", { nodes, links });
-    
-    // Return graph data
-    return {
-      nodes,
+    const result = {
+      nodes: Array.from(uniqueNodes.values()),
       links
     };
+    
+    // Log the output for debugging
+    console.log("Generated graph data:", result);
+    
+    return result;
   }
 }
