@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { ShimmerButton } from "../ui/actionbutton";
+import { useRouter } from "next/navigation"
 
 const HeroSection = () => {
+  const navigate = useRouter();
   return (
     <div className="bg-[#000206] w-full text-white py-20 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
@@ -55,8 +57,10 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Button */}
-          <div className="mt-6 flex justify-center md:justify-start"> 
-          <ShimmerButton>Connect</ShimmerButton>
+          <div className="mt-6 flex justify-center  text-white md:justify-start"> 
+          <ShimmerButton onClick={() => { 
+           navigate.push('/ex')
+          }}> Connect </ShimmerButton>
           </div>
         </div>
       </div>
