@@ -1,8 +1,23 @@
 import { WebSocketServer } from "ws";
 import { dumpWalletData } from "../controller/account.controller";
 
-export function createWebSocketServer(port: number) {
-  const wss = new WebSocketServer({ port });
+export function createWebSocketServer() {
+  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080; // Use the dynamic port from Render or default to 8080
+  const allowedOrigins = [process.env.FRONTEND_URL, 'https://localhost:3000'];
+
+  const wss = new WebSocketServer({
+    port,
+    verifyClient: (info, done) => {
+      const origin = info.origin;
+
+      // Check if the origin is in the allowedOrigins list
+      if (allowedOrigins.includes(origin)) {
+        done(true);  // Accept the connection
+      } else {
+        done(false, 403, 'Forbidden');  // Reject the connection
+      }
+    }
+  });
 
   wss.on("connection", (ws) => {
     console.log("✅ Client connected via WebSocket");
@@ -33,3 +48,4 @@ export function createWebSocketServer(port: number) {
 
   console.log(`🚀 WebSocket server is running at ws://localhost:${port}`);
 }
+
