@@ -9,6 +9,7 @@ export interface WebSocketTransaction {
   amount: number | null;
   tokenAddress: string | null;
   description?: string;
+  wallet?: string
 }
 
 export interface Node {
