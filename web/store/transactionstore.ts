@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { 
-  TransactionStore, 
-  WebSocketTransaction,  
+import {
+  TransactionStore,
+  WebSocketTransaction,
 } from '../types/transactiontypes';
 import { sampleTransactions } from '../lib/transactionutils';
 import { WebSocketService } from '../action/transaction';
 import { TransactionProcessor } from '../action/transactionprocess';
 
 // Initialize services
-const transactionProcessor = new TransactionProcessor();
+const transactionProcessor = new TransactionProcessor('default-wallet-address');
 
 const useTransactionStore = create<TransactionStore>()(
   devtools(
@@ -32,10 +32,10 @@ const useTransactionStore = create<TransactionStore>()(
           initializeData: () => {
             set({ isLoading: true });
             const graphData = transactionProcessor.processTransactions(sampleTransactions);
-            set({ 
+            set({
               transactions: sampleTransactions,
               graphData,
-              isLoading: false 
+              isLoading: false
             });
           },
 
@@ -45,13 +45,30 @@ const useTransactionStore = create<TransactionStore>()(
                 () => set({ connected: true }),
                 () => set({ connected: false }),
                 (data) => {
+                  // Update raw message immediately
                   set({ rawMessage: data });
+                  
+                  // Process the incoming transaction data
                   const typedData = data as { transactions?: WebSocketTransaction[]; data?: { transactions?: WebSocketTransaction[] } };
-
+                  
+                  let incomingTransactions: WebSocketTransaction[] = [];
+                  
                   if (typedData.transactions && Array.isArray(typedData.transactions)) {
-                    get().processTransactions(typedData.transactions);
-                  } else if (typedData.data?.transactions) {
-                    get().processTransactions(typedData.data.transactions);
+                    incomingTransactions = typedData.transactions;
+                  } else if (typedData.data?.transactions && Array.isArray(typedData.data.transactions)) {
+                    incomingTransactions = typedData.data.transactions;
+                  }
+                  
+                  // Only process if we actually received transactions
+                  if (incomingTransactions.length > 0) {
+                    // Generate new graph data based on these transactions
+                    const newGraphData = transactionProcessor.processTransactions(incomingTransactions);
+                    
+                    // Update state with both transactions and new graph data
+                    set({
+                      transactions: incomingTransactions,
+                      graphData: newGraphData
+                    });
                   }
                 },
                 (error) => set({ error, connected: false })
@@ -69,6 +86,9 @@ const useTransactionStore = create<TransactionStore>()(
 
           sendWalletQuery: (walletAddress: string) => {
             if (webSocketService) {
+              // Update the processor's main wallet address
+              transactionProcessor.setMainWallet(walletAddress);
+              // Send the query
               webSocketService.sendWalletAddress(walletAddress);
             } else {
               console.warn("WebSocket service not initialized");
@@ -76,22 +96,22 @@ const useTransactionStore = create<TransactionStore>()(
           },
 
           processTransactions: (transactions: WebSocketTransaction[]) => {
-            const graphData = transactionProcessor.processTransactions(transactions);
+            const newGraphData = transactionProcessor.processTransactions(transactions);
             set({
               transactions,
-              graphData
+              graphData: newGraphData
             });
           },
 
           setSelectedElement: (element, type) => {
-            set({ 
+            set({
               selectedElement: element,
               selectedType: type
             });
           },
 
           clearSelection: () => {
-            set({ 
+            set({
               selectedElement: null,
               selectedType: null
             });
