@@ -23,9 +23,9 @@ export default function RewardCard() {
 
       {/* Right Text */}
       <div className="w-full md:w-1/2 text-center md:text-left space-y-4">
-        <h2 className="text-xl font-bold text-white custom-heading4">Start Earning Rewards Today</h2>
+        <h2 className="text-xl font-bold text-white custom-heading4">Start Visualize your wallet</h2>
         <p className="text-gray-300 custom-span">
-          Don’t just hold your crypto, make it work for you.
+          Don’t just use typical explorer .
         </p>
         <ShimmerButton onClick={() => router.push('/ex')}>
           get started

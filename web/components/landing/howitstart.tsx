@@ -10,15 +10,15 @@ export default function GettingStarted() {
     <section className="py-20 bg-[#000206] text-white text-center px-4 relative overflow-hidden">
       <h2 className="text-4xl font-bold mb-4 custom-heading3">How it work</h2>
       <p className="text-gray-400 mb-16 custom-span">
-        Select your coin, stake securely, & watch your rewards grow.
+        Select wallet address and see your transaction logs txn.
       </p>
 
       <div className="relative flex flex-col lg:flex-row items-center justify-center gap-20 max-w-6xl mx-auto">
         {/* Left Card */}
         <StepCard
           icon={<FaCoins className="text-3xl text-blue-400" />}
-          title="Choose Your Coin"
-          description="Choose top crypto coins like ETH or ADA."
+          title="Choose Your wallet"
+          description="would you like see your txn logs."
         />
 
         
@@ -33,8 +33,8 @@ export default function GettingStarted() {
         {/* Right Card */}
         <StepCard
           icon={<FaLock className="text-3xl text-blue-400" />}
-          title="Your Rewards Grow"
-          description="Enjoy regular payouts directly to your account."
+          title="Search your address"
+          description="put your address search."
         />
       </div>
 
@@ -54,9 +54,9 @@ function StepCard({
 }) {
   return (
     <MagicCard >
-    <div className="relative rounded-xl px-6 py-8 w-full max-w-xs border border-blue-50">
+    <div className="relative rounded-xl px-8 py-8 w-full max-w-xs border border-blue-50">
       <div className="flex justify-center mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2 custom-heading2">{title}</h3>
+      <h3 className="text-xl font-semibold mb-4 custom-heading2">{title}</h3>
       <p className="text-gray-400 custom-span">{description}</p>
     </div>
     </MagicCard>

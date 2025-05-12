@@ -57,10 +57,11 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Button */}
-          <div className="mt-6 flex justify-center  text-white md:justify-start"> 
+          <div className="mt-6 flex justify-center  md:justify-start"> 
           <ShimmerButton onClick={() => { 
            navigate.push('/ex')
-          }}> Connect </ShimmerButton>
+          }}> Explore
+           </ShimmerButton>
           </div>
         </div>
       </div>
