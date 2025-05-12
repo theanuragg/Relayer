@@ -1,23 +1,23 @@
-import https from 'https';
 import express from 'express';
 import { WebSocketServer } from 'ws';
 import { dumpWalletData } from "../controller/account.controller";
+import http from 'http';
 
 export function createWebSocketServer() {
   const app = express();
 
-  // Optional: Add HTTP route for health check or API
+  // Optional: HTTP health route
   app.get('/', (req, res) => {
     res.send('🟢 WebSocket Server Running');
   });
 
-  // Use Railway-assigned PORT
+  // Use Railway-provided port
   const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
-  // Railway handles TLS, so you can use plain createServer (Railway will auto TLS terminate)
-  const server = https.createServer({}, app);
+  // Correct: use plain HTTP server (Railway handles HTTPS)
+  const server = http.createServer(app);
 
-  // Attach WebSocket server to HTTPS server
+  // WebSocket server attached to the HTTP server
   const wss = new WebSocketServer({ server });
 
   wss.on('connection', (ws) => {
@@ -46,6 +46,6 @@ export function createWebSocketServer() {
   });
 
   server.listen(port, () => {
-    console.log(`🚀 WebSocket server is running at wss://your-railway-app-domain:${port}`);
+    console.log(`🚀 WebSocket server is running at ws://localhost:${port}`);
   });
 }
