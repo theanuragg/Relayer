@@ -8,7 +8,6 @@ declare global {
   }
 }
 
-const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_WEBSOCKET_SERVER|| "ws://localhost:8080";
 
 export class WebSocketService {
   private socket: WebSocket | null = null;
@@ -32,10 +31,14 @@ export class WebSocketService {
   }
 
   connect() {
-    console.log(`Connecting to WebSocket at ${NEXT_PUBLIC_URL}`);
+    console.log(`Connecting to WebSocket at ${process.env.NEXT_PUBLIC_WEBSOCKET_SERVER}`);
     
     try {
-      this.socket = new WebSocket(NEXT_PUBLIC_URL);
+      const websocketServer = process.env.NEXT_PUBLIC_WEBSOCKET_SERVER;
+      if (!websocketServer) {
+        throw new Error("WebSocket server URL is not defined in environment variables.");
+      }
+      this.socket = new WebSocket(websocketServer);
       
       this.socket.onopen = () => {
         console.log("WebSocket connection established");
