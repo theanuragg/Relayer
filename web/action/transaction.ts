@@ -34,7 +34,7 @@ export class WebSocketService {
     console.log(`Connecting to WebSocket at ${process.env.NEXT_PUBLIC_WEBSOCKET_SERVER}`);
     
     try {
-      const websocketServer = process.env.NEXT_PUBLIC_WEBSOCKET_SERVER;
+      const websocketServer = "wss://relayer-production-077c.up.railway.app"
       if (!websocketServer) {
         throw new Error("WebSocket server URL is not defined in environment variables.");
       }
