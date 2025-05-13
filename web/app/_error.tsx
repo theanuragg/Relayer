@@ -14,7 +14,7 @@ const ErrorPage = ({ statusCode }: ErrorPageProps) => {
   return <h1>An error occurred: {statusCode}</h1>;
 };
 
-// This function will allow you to capture the error status during SSR or when there's an error
+
 ErrorPage.getInitialProps = ({ res, err }: NextPageContext) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };

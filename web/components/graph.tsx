@@ -152,7 +152,7 @@ const BlockchainGraph: React.FC<BlockchainGraphProps> = ({
 
     node
       .append("circle")
-      .attr("r", 20) // corrected radius from 300 to 20
+      .attr("r", 20) 
       .attr("fill", (d) => NODE_COLORS[d.type] || NODE_COLORS.default)
       .attr("stroke", "#fff")
       .attr("stroke-width", 1.5);

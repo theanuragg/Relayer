@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     description:
       "Explore how accounts are visually connected over time. For devs, users, analysts.",
     images: ["/metadata.jpg"],
-    creator: "@theaanurag", // optional
+    creator: "@theaanurag", 
   },
 };
 

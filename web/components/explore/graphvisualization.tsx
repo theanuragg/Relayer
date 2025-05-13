@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useCallback } from "react";
 import * as d3 from "d3";
 import { D3DragEvent } from "d3";
 import ZoomControls from "./zoomcontrols";
-import useTransactionStore from "../../store/transactionstore"; // Update path as needed
-import { Node, Link, GraphData } from "../../types/transactiontypes"; // Update path as needed
+import useTransactionStore from "../../store/transactionstore"; 
+import { Node, Link, GraphData } from "../../types/transactiontypes"; 
 
 export default function GraphVisualization() {
   // Get state and actions from the refactored store
@@ -31,7 +31,7 @@ export default function GraphVisualization() {
         .attr("viewBox", [0, 0, width, height])
         .attr("width", "100%")
         .attr("height", "100%")
-        .style("background-color", "#121212"); // Dark background for better glow effect
+        .style("background-color", "#121212"); 
 
       // Create zoom behavior
       const zoom: d3.ZoomBehavior<SVGSVGElement, unknown> = d3
@@ -125,8 +125,6 @@ export default function GraphVisualization() {
         .attr("in2", "glow")
         .attr("operator", "over");
 
-      // Add other filter definitions...
-      // ... (rest of filter definitions)
 
       // Blue glow filter for regular nodes
       const blueGlow = defs
@@ -438,7 +436,6 @@ export default function GraphVisualization() {
   function dragended(event: D3DragEvent<SVGGElement, Node, unknown>, d: Node) {
     if (!event.active && simulationRef.current)
       simulationRef.current.alphaTarget(0);
-    // Keep the node fixed at its new position
     d.fx = undefined;
     d.fy = undefined;
   }

@@ -11,7 +11,7 @@ import {
   Panel,
   PanelResizeHandle,
 } from "react-resizable-panels";
-import useIsMobile from "@/hooks/useIsMobile"; // Import the hook
+import useIsMobile from "@/hooks/useIsMobile"; 
 
 export default function TransactionGraph() {
   const {
@@ -22,7 +22,7 @@ export default function TransactionGraph() {
     disconnectWebSocket,
   } = useTransactionStore();
 
-  const isMobile = useIsMobile(); // Call hook
+  const isMobile = useIsMobile(); 
 
   useEffect(() => {
     initializeData();
