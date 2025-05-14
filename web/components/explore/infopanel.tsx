@@ -1,7 +1,7 @@
 'use client';
 
-import  useTransactionStore  from '../../store/transactionstore'; // Update path as needed
-import { Node, Transaction } from '../../types/transactiontypes';
+import  useTransactionStore  from '@/store/transactionstore'; // Update path as needed
+import { Node, Transaction } from '@/types/transactiontypes';
 
 function NodeInfo({ node }: { node: Node }) {
   return (

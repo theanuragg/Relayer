@@ -3,10 +3,10 @@ import { devtools, persist } from 'zustand/middleware';
 import {
   TransactionStore,
   WebSocketTransaction,
-} from '../types/transactiontypes';
-import { sampleTransactions } from '../lib/transactionutils';
-import { WebSocketService } from '../action/transaction';
-import { TransactionProcessor } from '../action/transactionprocess';
+} from '@/types/transactiontypes';
+import { sampleTransactions } from '@/lib/transactionutils';
+import { WebSocketService } from '@/action/transaction';
+import { TransactionProcessor } from '@/action/transactionprocess';
 
 // Initialize services
 const transactionProcessor = new TransactionProcessor('default-wallet-address');

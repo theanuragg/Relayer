@@ -1,4 +1,4 @@
-import { WebSocketTransaction, GraphData, Node, Link } from '../types/transactiontypes';
+import { WebSocketTransaction, GraphData, Node, Link } from '@/types/transactiontypes';
 
 // Format addresses for labels
 const formatAddress = (address: string): string => {

@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useCallback } from "react";
 import * as d3 from "d3";
 import { D3DragEvent } from "d3";
 import ZoomControls from "./zoomcontrols";
-import useTransactionStore from "../../store/transactionstore"; 
-import { Node, Link, GraphData } from "../../types/transactiontypes"; 
+import useTransactionStore from "@/store/transactionstore"; 
+import { Node, Link, GraphData } from "@/types/transactiontypes"; 
 
 export default function GraphVisualization() {
   // Get state and actions from the refactored store

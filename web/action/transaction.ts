@@ -1,5 +1,5 @@
 // WebSocketService.ts
-import { MAIN_WALLET, WS_URL } from '../lib/transactionutils';
+import { MAIN_WALLET, WS_URL } from '@/lib/transactionutils';
 
 // Extend the Window interface to include transactionSocket
 declare global {

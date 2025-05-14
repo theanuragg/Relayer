@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import GraphVisualization from "../../components/explore/graphvisualization";
-import Legend from "../../components/explore/legend";
-import RawDataViewer from "../../components/explore/rawdataviewer";
-import useTransactionStore from "../../store/transactionstore";
+import GraphVisualization from "@/components/explore/graphvisualization";
+import Legend from "@/components/explore/legend";
+import RawDataViewer from "@/components/explore/rawdataviewer";
+import useTransactionStore from "@/store/transactionstore";
 import AppBar from "@/components/explore/appbar";
 import {
   PanelGroup,

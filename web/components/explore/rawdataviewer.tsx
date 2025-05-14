@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import useTransactionStore from "../../store/transactionstore";
+import useTransactionStore from "@/store/transactionstore";
 import { Copy } from "lucide-react";
 
 export default function RawDataViewer() {

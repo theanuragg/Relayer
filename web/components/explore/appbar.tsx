@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Search } from 'lucide-react';
-import useTransactionStore from '../../store/transactionstore';
+import useTransactionStore from '@/store/transactionstore';
 
 export default function AppBar() {
   const [inputValue, setInputValue] = useState('');

@@ -1,5 +1,5 @@
 import { Wallet } from 'lucide-react';
-import { Node } from '../types/transactiontypes';
+import { Node } from '@/types/transactiontypes';
 
 // Constants
 export const MAIN_WALLET = "5jeASqLezFbqGsgLeNYKgb7ySzzpCXk7zXMTsxewXADS";
