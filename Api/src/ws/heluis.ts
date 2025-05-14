@@ -21,9 +21,9 @@ export function createWebSocketServer() {
   const wss = new WebSocketServer({ server });
 
   wss.on('connection', (ws) => {
-    console.log('✅ Client connected via WebSocket');
+    console.log(' Client connected via WebSocket');
 
-    ws.send(JSON.stringify({ message: '🟢 WebSocket connected' }));
+    ws.send(JSON.stringify({ message: ' WebSocket connected' }));
 
     ws.on('message', async (message) => {
       try {
@@ -36,7 +36,7 @@ export function createWebSocketServer() {
         }
 
         const result = await dumpWalletData(wallet);
-        console.log('📦 Fetched Wallet Data:', result);
+        console.log(' Fetched Wallet Data:', result);
         ws.send(JSON.stringify({ status: 'success', data: result }));
       } catch (err: any) {
         console.error('❌ Failed to process message:', err);
@@ -46,6 +46,6 @@ export function createWebSocketServer() {
   });
 
   server.listen(port, () => {
-    console.log(`🚀 WebSocket server is running at ws://localhost:${port}`);
+    console.log(` WebSocket server is running at ws://localhost:${port}`);
   });
 }

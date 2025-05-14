@@ -36,16 +36,16 @@ export async function getTransactions(wallet: string) {
   const cachedData = await redis.get(cacheKey);
 
   if (cachedData) {
-    console.log("✅ Cache hit for", wallet);
+    console.log(" Cache hit for", wallet);
     return JSON.parse(cachedData);
   }
 
   const url = `${BASE_URL}/v0/addresses/${wallet}/transactions?api-key=${API_KEY}`;
-  console.log("🌐 Requesting:", url);
+  console.log(" Requesting:", url);
 
   try {
     const res = await axios.get(url, { headers });
-    console.log("📦 Fetched from API:", res.status);
+    console.log(" Fetched from API:", res.status);
 
     const normalized = normalizeTransactions(res.data);
 

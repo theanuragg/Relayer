@@ -1,17 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import GraphVisualization from "@/components/explore/graphvisualization";
-import Legend from "@/components/explore/legend";
-import RawDataViewer from "@/components/explore/rawdataviewer";
-import useTransactionStore from "@/store/transactionstore";
-import AppBar from "@/components/explore/appbar";
-import {
-  PanelGroup,
-  Panel,
-  PanelResizeHandle,
-} from "react-resizable-panels";
-import useIsMobile from "@/hooks/useIsMobile"; 
+import { useEffect } from 'react';
+import GraphVisualization from '@/components/explore/graphvisualization';
+import Legend from '@/components/explore/legend';
+import RawDataViewer from '@/components/explore/rawdataviewer';
+import useTransactionStore from '@/store/transactionstore';
+import AppBar from '@/components/explore/appbar';
+import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+import useIsMobile from '@/hooks/useIsMobile';
 
 export default function TransactionGraph() {
   const {
@@ -22,7 +18,7 @@ export default function TransactionGraph() {
     disconnectWebSocket,
   } = useTransactionStore();
 
-  const isMobile = useIsMobile(); 
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     initializeData();
@@ -36,9 +32,7 @@ export default function TransactionGraph() {
     }
   }, [rawMessage]);
 
-  useEffect(() => {
-    console.log("Graph data in component:", graphData);
-  }, [graphData]);
+  useEffect(() => {}, [graphData]);
 
   return (
     <div className="flex flex-col w-full h-screen">
@@ -81,5 +75,4 @@ export default function TransactionGraph() {
 }
 
 function setLastWebSocketMessage(message: string) {
-  console.log("Last WebSocket Message:", message);
 }

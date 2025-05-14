@@ -32,15 +32,13 @@ export class TransactionProcessor {
     const uniqueNodes = new Map<string, Node>();
     const links: Link[] = [];
     
-    // Log for debugging
-    console.log("Processing transactions:", transactions.length);
-    
+        
     transactions.forEach((tx) => {
       const { from, to, amount, signature } = tx;
       
-      // Basic validation
+
       if (from && to && amount !== null && signature) {
-        // Create nodes if they don't exist
+       
         if (!uniqueNodes.has(from)) {
           uniqueNodes.set(from, createNode(from, this.mainWallet));
         }
@@ -87,8 +85,6 @@ export class TransactionProcessor {
       links
     };
     
-    // Log the output for debugging
-    console.log("Generated graph data:", result);
     
     return result;
   }

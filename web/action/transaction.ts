@@ -27,30 +27,28 @@ export class WebSocketService {
     this.onMessage = onMessage;
     this.onError = onError;
     
-    console.log("WebSocketService initialized");
+ 
   }
 
   connect() {
-    console.log(`Connecting to WebSocket at ${process.env.NEXT_PUBLIC_WEBSOCKET_SERVER}`);
+    
     
     try {
-      const websocketServer = "wss://relayer-production-077c.up.railway.app"
+      const websocketServer = process.env.NEXT_PUBLIC_WEBSOCKET_SERVER
       if (!websocketServer) {
         throw new Error("WebSocket server URL is not defined in environment variables.");
       }
       this.socket = new WebSocket(websocketServer);
       
       this.socket.onopen = () => {
-        console.log("WebSocket connection established");
         this.onConnected();
       };
       
       this.socket.onmessage = (event) => {
-        console.log("WebSocket message received:", event.data.substring(0, 200) + (event.data.length > 200 ? '...' : ''));
+        console.log("WebSocket message received:");
         
         try {
           const data = JSON.parse(event.data);
-          console.log("Parsed WebSocket data structure:", Object.keys(data));
           this.onMessage(data);
         } catch (err) {
           console.error("Error parsing WebSocket message:", err);

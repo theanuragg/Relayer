@@ -13,7 +13,6 @@ export default function AppBar() {
     if (trimmed) {
       sendWalletQuery(trimmed);
       setInputValue('');
-      console.log("Wallet address sent to WebSocket:", trimmed);
     }
   };
 

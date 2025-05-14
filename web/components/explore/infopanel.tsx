@@ -51,7 +51,6 @@ export default function InfoPanel() {
   // Using the clearSelection function directly from the store now
   const handleClearSelection = () => {
     clearSelection();
-    console.log("Selection cleared");
   };
 
   return (
